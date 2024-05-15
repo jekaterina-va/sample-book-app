@@ -4,49 +4,49 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                scripts{
+                script{
                     build_docker_image()
                 }
             }
         }
         stage('deploy-dev') {
             steps {
-                scripts{
+                script{
                     deploy("DEV")
                 }
             }
         }
         stage('api-test-dev') {
             steps {
-                scripts{
+                script{
                     run_api_tests("DEV")
                 }
             }
         }
         stage('deploy-stg') {
             steps {
-                scripts{
+                script{
                     deploy("STG")
                 }
             }
         }
         stage('api-test-stg') {
             steps {
-                scripts{
+                script{
                     run_api_tests("STG")
                 }
             }
         }
         stage('deploy-prd') {
             steps {
-                scripts{
+                script{
                     deploy("PRD")
                 }
             }
         }
         stage('api-test-prd') {
             steps {
-                scripts{
+                script{
                     run_api_tests("PRD")
                 }
             }
