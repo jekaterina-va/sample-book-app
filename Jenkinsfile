@@ -4,38 +4,64 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "Build sample-book-app.. "
+                scripts{
+                    build_docker_image()
+                }
             }
         }
         stage('deploy-dev') {
             steps {
-                echo "Deployment triggered to DEV environment.. "
+                scripts{
+                    deploy("DEV")
+                }
             }
         }
         stage('api-test-dev') {
             steps {
-                echo "API Tests against DEV environment.. "
+                scripts{
+                    run_api_tests("DEV")
+                }
             }
         }
         stage('deploy-stg') {
             steps {
-                echo "Deployment triggered to STG environment.. "
+                scripts{
+                    deploy("STG")
+                }
             }
         }
         stage('api-test-stg') {
             steps {
-                echo "API Tests against STG environment.. "
+                scripts{
+                    run_api_tests("STG")
+                }
             }
         }
         stage('deploy-prd') {
             steps {
-                echo "Deployment triggered to PRD environment.. "
+                scripts{
+                    deploy("PRD")
+                }
             }
         }
         stage('api-test-prd') {
             steps {
-                echo "API Tests against PRD environment.. "
+                scripts{
+                    run_api_tests("PRD")
+                }
             }
         }
     }
+}
+
+def build_docker_image(){
+    echo "Build sample-book-app.. "
+}
+
+def deploy(String environment){
+    echo "Deployment triggered to ${environment} environment.. "
+}
+
+def run_api_tests(String environment){
+    echo "API Tests against ${environment} environment.. "
 }
