@@ -42,6 +42,7 @@ pipeline {
 
 def build_docker_image(){
     echo "Build sample-book-app.. "
+    sh 'ls'
 }
 
 def deploy(String environment){
