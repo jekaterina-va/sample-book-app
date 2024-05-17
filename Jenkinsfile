@@ -42,10 +42,13 @@ pipeline {
 
 def build_docker_image(){
     echo "Build sample-book-app.. "
-    sh 'ls'
-    sh 'docker build --no-cache -t jekaterina2021/sample-book-app:latest .'
-    sh 'docker push jekaterina2021/sample-book-app:latest'
+    sh "docker build --no-cache -t jekaterina2021/sample-book-app ."
 
+    echo "Running unit tests for node application in docker container.."
+    sh "docker run --rm --entrypoint=npm jekaterina2021/sample-book-app run test"
+    
+    echo "Pushing docker image to docker registry.."
+    sh "docker push jekaterina2021/sample-book-app"
 }
 
 def deploy(String environment){
