@@ -14,7 +14,7 @@ pipeline {
         }
         stage('api-test-dev') {
             steps {
-                run_api_tests("dev")
+                run_api_tests("DEV")
             }
         }
         stage('deploy-stg') {
@@ -24,7 +24,7 @@ pipeline {
         }
         stage('api-test-stg') {
             steps {
-                run_api_tests("stg")
+                run_api_tests("STG")
             }
         }
         stage('deploy-prd') {
@@ -34,7 +34,7 @@ pipeline {
         }
         stage('api-test-prd') {
             steps {
-                run_api_tests("prd")
+                run_api_tests("PRD")
             }
         }
     }
@@ -53,7 +53,8 @@ def build_docker_image(){
 
 def deploy(String environment){
     echo "Deployment triggered to ${environment} environment.. "
-    sh "docker-compose down"
+    sh "docker-compose stop sample-book-app-${environment}"
+    sh "docker-compose rm sample-book-app-${environment}"
     sh "docker-compose up -d sample-book-app-${environment}"
 }
 
