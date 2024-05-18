@@ -15,48 +15,48 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build-docker-image:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - name: Step description
         run: echo "Building docker image.."
   deploy-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [build-docker-image]
     steps:
       - uses: actions/checkout@v4
       - name: Step description
         run: echo "Deployment triggered on DEV environment.."      
   api-integration-tests-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-dev]
     steps:
       - uses: actions/checkout@v4
       - name: Step description
         run: echo "API tests triggered on DEV environment.." 
   deploy-stg:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [api-integration-tests-dev]
     steps:
       - uses: actions/checkout@v4
       - name: Step description
         run: echo "Deployment triggered on STG environment.."      
   api-integration-tests-stg:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-stg]
     steps:
       - uses: actions/checkout@v4
       - name: Step description
         run: echo "API tests triggered on STG environment.."   
   deploy-prd:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [api-integration-tests-stg]
     steps:
       - uses: actions/checkout@v4
       - name: Step description
         run: echo "Deployment triggered on PRD environment.."      
   api-integration-tests-prd:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-prd]
     steps:
       - uses: actions/checkout@v4
