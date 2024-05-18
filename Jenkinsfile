@@ -62,5 +62,7 @@ def deploy(String environment){
 
 def run_api_tests(String environment){
     echo "API Tests against ${environment} environment.. "
-    sh "docker run --network=host --rm jekaterina2021/api-tests run BOOKS BOOKS_${environment}"
+    sh "mkdir test-reports"
+    sh "mkdir test-outputs/${environment}"
+    sh "docker run -v $PWD/test-reports/${environment}:/api-test-automation/mochawesome-report/ --network=host --rm jekaterina2021/api-tests run BOOKS BOOKS_${environment}"
 }
