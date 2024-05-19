@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: List files
-        run: sh "ls"
+        run: ls
         shell: bash
       - uses: ./.github/actions/build
   deploy-dev:

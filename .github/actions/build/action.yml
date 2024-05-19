@@ -3,14 +3,14 @@ description: 'Action for building docker image for our sample-book-app'
 runs:
   using: "composite"
   steps:
-    - run: sh "ls"
+    - run: ls
       shell: bash
     - name: Build docker image
-      run: sh "docker build --no-cache -t jekaterina2021/sample-book-app ." 
+      run: docker build --no-cache -t jekaterina2021/sample-book-app .
       shell: bash
     - name: Running unit tests for node application in docker container..
-      run: sh "docker run --rm --entrypoint=npm jekaterina2021/sample-book-app run test"
+      run: docker run --rm --entrypoint=npm jekaterina2021/sample-book-app run test
       shell: bash
     - name: Pushing docker image to docker registry..
-      run: sh "docker push jekaterina2021/sample-book-app"
+      run: docker push jekaterina2021/sample-book-app
       shell: bash
