@@ -24,7 +24,7 @@ jobs:
     needs: [build-docker-image]
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/build 
+      - uses: ./.github/actions/deploy 
         with:
           environment: 'dev'
   api-integration-tests-dev:
@@ -40,7 +40,7 @@ jobs:
     needs: [api-integration-tests-dev]
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/build 
+      - uses: ./.github/actions/deploy 
         with:
           environment: 'stg'    
   api-integration-tests-stg:
@@ -56,7 +56,7 @@ jobs:
     needs: [api-integration-tests-stg]
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/build 
+      - uses: ./.github/actions/deploy 
         with:
           environment: 'prd'    
   api-integration-tests-prd:
