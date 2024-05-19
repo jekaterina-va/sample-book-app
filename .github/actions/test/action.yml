@@ -10,5 +10,5 @@ runs:
     - run: echo "API Tests against ${{ inputs.environment }} environment.. "
       shell: bash
     - name: Run API Tests
-      run: docker run --network=host --rm jekaterina2021/api-tests run BOOKS BOOKS_${{ inputs.environment }}
+      run: docker run --network=host --rm jekaterina2021/sample-book-app run BOOKS BOOKS_${{ inputs.environment }}
       shell: bash
