@@ -3,7 +3,7 @@ description: 'Action for building docker image for our sample-book-app'
 runs:
   using: "composite"
   steps:
-    - run: echo "Building docker image and pushing it to docker registry.."
+    - run: sh "ls"
       shell: bash
     - name: Build docker image
       run: sh "docker build --no-cache -t jekaterina2021/sample-book-app ." 
