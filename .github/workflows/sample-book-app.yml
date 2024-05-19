@@ -32,8 +32,9 @@ jobs:
     needs: [deploy-dev]
     steps:
       - uses: actions/checkout@v4
-      - name: Step description
-        run: echo "API tests triggered on DEV environment.." 
+      - uses: ./.github/actions/test
+        with:
+          environment: 'DEV'
   deploy-stg:
     runs-on: self-hosted
     needs: [api-integration-tests-dev]
@@ -47,8 +48,9 @@ jobs:
     needs: [deploy-stg]
     steps:
       - uses: actions/checkout@v4
-      - name: Step description
-        run: echo "API tests triggered on STG environment.."   
+      - uses: ./.github/actions/test
+        with:
+          environment: 'STG'
   deploy-prd:
     runs-on: self-hosted
     needs: [api-integration-tests-stg]
@@ -62,5 +64,6 @@ jobs:
     needs: [deploy-prd]
     steps:
       - uses: actions/checkout@v4
-      - name: Step description
-        run: echo "API tests triggered on PRD environment.."               
+      - uses: ./.github/actions/test
+        with:
+          environment: 'PRD'          

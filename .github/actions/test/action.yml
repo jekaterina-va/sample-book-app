@@ -1,21 +1,14 @@
 name: 'Run API tests'
 description: 'Action to run API integration tests against Sample Book App'
+inputs: 
+  environment:
+    description: 'Environment where to run Sample Book Application API tests'
+    required: true
 runs:
   using: "composite"
   steps:
-    - run: echo "Building docker image and pushing it to docker registry.."
+    - run: echo "API Tests against ${{ inputs.environment }} environment.. "
       shell: bash
-    - name: Build docker image
-      run: docker build --no-cache -t jekaterina2021/sample-book-app .
+    - name: Run API Tests
+      run: docker run --network=host --rm jekaterina2021/api-tests run BOOKS BOOKS_${{ inputs.environment }}
       shell: bash
-    - name: Running unit tests for node application in docker container..
-      run: docker run --rm --entrypoint=npm jekaterina2021/sample-book-app run test
-      shell: bash
-    - name: Pushing docker image to docker registry..
-      run: docker push jekaterina2021/sample-book-app
-      shell: bash
-
-
-    echo "API Tests against ${environment} environment.. "
-    // sh "docker run -v ${PWD}/test-reports/${environment}:/api-test-automation/mochawesome-report/ --network=host --rm jekaterina2021/api-tests run BOOKS BOOKS_${environment}"
-    sh "docker run --network=host --rm jekaterina2021/api-tests run BOOKS BOOKS_${environment}"
